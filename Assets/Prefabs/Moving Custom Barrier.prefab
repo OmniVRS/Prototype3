@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3681543479409252037}
   - component: {fileID: 3681543479409252036}
+  - component: {fileID: 1520981177800718061}
   m_Layer: 0
   m_Name: Moving Custom Barrier
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,6 +46,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe62c82c28d1d945b42aa04a97a02f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &1520981177800718061
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3681543479409252090}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4972992, y: 2.68473, z: 2.0529554}
+  m_Center: {x: -0.006793022, y: 0.5434611, z: -0.0033966303}
 --- !u!1001 &3681543477672338937
 PrefabInstance:
   m_ObjectHideFlags: 0
