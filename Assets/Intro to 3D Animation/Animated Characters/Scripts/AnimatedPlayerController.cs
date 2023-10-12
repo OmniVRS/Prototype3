@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AnimatedPlayerController : MonoBehaviour
@@ -7,6 +8,9 @@ public class AnimatedPlayerController : MonoBehaviour
     //Movement Variables
     private float verticalInput;
     public float moveSpeed;
+    private float savedMoveSpeed;
+    private float savedJumpForce;
+    private float savedTurnSpeed;
 
     private float horizontalInput;
     public float turnSpeed;
@@ -19,13 +23,16 @@ public class AnimatedPlayerController : MonoBehaviour
     //Animation Variables
     private Animator animator;
 
+    //Particles
+    public ParticleSystem dustCloud;
+
     // Start is called before the first frame update
     void Start()
     {
         //Get Components
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-
+        dustCloud.Stop();
 
     }
 
@@ -38,6 +45,15 @@ public class AnimatedPlayerController : MonoBehaviour
 
         //Activate or Deactivate running
         animator.SetFloat("verticalInput", Mathf.Abs(verticalInput));
+
+        //Activate Dust Cloud
+        if (verticalInput > 0 && !dustCloud.isPlaying && moveSpeed != 0)
+        {
+            dustCloud.Play();
+        } else if (verticalInput <= 0 || moveSpeed == 0)
+        {
+            dustCloud.Stop();
+        }
 
         //Rotation
         horizontalInput = Input.GetAxis("Horizontal");
@@ -52,9 +68,20 @@ public class AnimatedPlayerController : MonoBehaviour
         }
 
         //Shoot
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
             animator.SetTrigger("shoot");
+            savedMoveSpeed = moveSpeed;
+            savedJumpForce = jumpForce;
+            savedTurnSpeed = turnSpeed;
+            moveSpeed = 0;
+            jumpForce = 0;
+            turnSpeed = 0;
+        } else if (animator.GetAnimatorTransitionInfo(0).IsName("Un-die -> Idle"))
+        {
+            moveSpeed = savedMoveSpeed;
+            jumpForce = savedJumpForce;
+            turnSpeed = savedTurnSpeed;
         }
 
     }
@@ -67,4 +94,5 @@ public class AnimatedPlayerController : MonoBehaviour
             animator.SetBool("isOnGround", isOnGround);
         }
     }
+
 }
