@@ -25,6 +25,7 @@ public class AnimatedPlayerController : MonoBehaviour
 
     //Particles
     public ParticleSystem dustCloud;
+    public GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -44,13 +45,13 @@ public class AnimatedPlayerController : MonoBehaviour
         transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed * verticalInput);
 
         //Activate or Deactivate running
-        animator.SetFloat("verticalInput", Mathf.Abs(verticalInput));
+        animator.SetFloat("verticalInput", verticalInput);
 
         //Activate Dust Cloud
-        if (verticalInput > 0 && !dustCloud.isPlaying && moveSpeed != 0)
+        if (verticalInput > 0 && !dustCloud.isPlaying && moveSpeed != 0 && isOnGround)
         {
             dustCloud.Play();
-        } else if (verticalInput <= 0 || moveSpeed == 0)
+        } else if (verticalInput == 0 || moveSpeed == 0 || !isOnGround)
         {
             dustCloud.Stop();
         }
@@ -60,7 +61,7 @@ public class AnimatedPlayerController : MonoBehaviour
         transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime * horizontalInput);
 
         //Jumping
-        if(Input.GetKeyDown(KeyCode.Space)  && isOnGround)
+        if(Input.GetKeyDown(KeyCode.Space)  && isOnGround && (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("Run") || animator.GetCurrentAnimatorStateInfo(0).IsName("Backwards Run")))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;

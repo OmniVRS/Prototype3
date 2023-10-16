@@ -5230,6 +5230,7 @@ MonoBehaviour:
   jumpForce: 8
   isOnGround: 0
   dustCloud: {fileID: 1797683796}
+  player: {fileID: 938512435}
 --- !u!65 &938512439
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5335,14 +5336,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.1478165, y: -0, z: -0, w: 0.9890148}
-  m_LocalPosition: {x: -4.62, y: 4.15, z: -5.83}
+  m_LocalRotation: {x: -0.058518514, y: -0, z: -0, w: 0.99828637}
+  m_LocalPosition: {x: -4.62, y: 1.51, z: -5.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 17.001, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -6.71, y: 0, z: 0}
 --- !u!1 &1684727565
 GameObject:
   m_ObjectHideFlags: 0
@@ -6166,7 +6167,7 @@ ParticleSystem:
     radiusThickness: 1
     donutRadius: 0.2
     m_Position: {x: 0, y: 0.00000006592274, z: -0.0000000011324133}
-    m_Rotation: {x: 281.71774, y: 0, z: 0}
+    m_Rotation: {x: 282, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
